@@ -20,7 +20,7 @@
 #### Static
 
 + copy ```gost_34_12_magma_static.h```
-+ copy ```magma_dynamic.lib```
++ copy ```magma_static.lib```
 
 ### Use in your code
 

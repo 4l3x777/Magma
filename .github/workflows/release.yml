@@ -67,7 +67,7 @@ jobs:
         shell: cmd
         run: |
           cd build
-          cmake --build . --target package --config Release
+          cmake -DPATCH_VERSION=${{ github.run_number }} --build . --target package --config Release
           
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v1

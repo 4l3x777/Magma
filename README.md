@@ -15,7 +15,6 @@
 + copy ```gost_34_12_magma_dynamic.h```
 + copy ```magma_dynamic.dll```
 + copy ```magma_dynamic.lib```
-+ copy ```magma_dynamic.exp```
 
 #### Static
 

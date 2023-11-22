@@ -161,17 +161,17 @@ endif()
 install(
     TARGETS 
     magma_dynamic
-    RUNTIME DESTINATION magma/dynamic/bin COMPONENT applications
-    LIBRARY DESTINATION magma/dynamic/lib COMPONENT release
-    ARCHIVE DESTINATION magma/dynamic/lib COMPONENT release
+    RUNTIME DESTINATION magma/dynamic COMPONENT release
+    LIBRARY DESTINATION magma/dynamic COMPONENT release
+    ARCHIVE DESTINATION magma/dynamic COMPONENT release
 )
 
 install(
     TARGETS 
     magma_static
-    RUNTIME DESTINATION magma/static/bin COMPONENT applications
-    LIBRARY DESTINATION magma/static/lib COMPONENT release
-    ARCHIVE DESTINATION magma/static/lib COMPONENT release
+    RUNTIME DESTINATION magma/static COMPONENT release
+    LIBRARY DESTINATION magma/static COMPONENT release
+    ARCHIVE DESTINATION magma/static COMPONENT release
 )
 
 install(
@@ -187,10 +187,10 @@ set(CPACK_COMPONENTS_ALL release)
 
 # CPack area
 set(CPACK_GENERATOR "ZIP")
-set(CPACK_PACKAGE_VERSION "0.0.1")
+set(CPACK_PACKAGE_VERSION "0.0.2")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
-set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_VERSION_PATCH "2")
 set(CPACK_PACKAGE_CONTACT https://github.com/4l3x777/Magma)
 include(CPack)
 

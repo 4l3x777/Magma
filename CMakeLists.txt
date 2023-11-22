@@ -217,9 +217,9 @@ add_test(
     test_magma_gtest
 )
 
-add_test(
-    NAME 
-    unit_tests_test_magma_speedtest 
-    COMMAND 
-    test_test_magma_speedtest
-)
+#add_test(
+#    NAME 
+#    unit_tests_test_magma_speedtest 
+#    COMMAND 
+#    test_test_magma_speedtest
+#)

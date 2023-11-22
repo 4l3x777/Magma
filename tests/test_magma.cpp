@@ -1,17 +1,18 @@
 #include <gtest/gtest.h>
 #include <iostream>
- 
-extern "C" {
-	uint64_t  _GOST_encr(uint8_t* byPKey, uint32_t* dwA1, uint32_t* dwA0);
-	uint64_t  _GOST_decr(uint8_t* byPKey, uint32_t* dwA1, uint32_t* dwA0);
-    uint32_t _t_proc(uint32_t dwA);
-    uint32_t _g_proc(uint32_t dwK, uint32_t dwA);
-    void _G1_proc(uint32_t dwK, uint32_t* dwA1, uint32_t* dwA0);
-    uint64_t _G2_proc(uint32_t dwK, uint32_t* dwA1, uint32_t* dwA0);
-    uint32_t _RKey_proc(uint8_t* byPKey, uint8_t byRNum);
+
+extern "C"
+{
+	uint64_t _GOST_encr(uint8_t *byPKey, uint32_t *dwA1, uint32_t *dwA0);
+	uint64_t _GOST_decr(uint8_t *byPKey, uint32_t *dwA1, uint32_t *dwA0);
+	uint32_t _t_proc(uint32_t dwA);
+	uint32_t _g_proc(uint32_t dwK, uint32_t dwA);
+	void _G1_proc(uint32_t dwK, uint32_t *dwA1, uint32_t *dwA0);
+	uint64_t _G2_proc(uint32_t dwK, uint32_t *dwA1, uint32_t *dwA0);
+	uint32_t _RKey_proc(uint8_t *byPKey, uint8_t byRNum);
 }
 
-class TestMagma : public ::testing::Test 
+class TestMagma : public ::testing::Test
 {
 protected:
 	void SetUp() {}
@@ -51,7 +52,7 @@ TEST_F(TestMagma, test_G2_proc)
 
 TEST_F(TestMagma, test_RKey_proc)
 {
-	uint8_t key[32] = { 0xff, 0xfe, 0xfd, 0xfc, 0xfb, 0xfa, 0xf9, 0xf8, 0xf7, 0xf6, 0xf5, 0xf4, 0xf3, 0xf2, 0xf1, 0xf0, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
+	uint8_t key[32] = {0xff, 0xfe, 0xfd, 0xfc, 0xfb, 0xfa, 0xf9, 0xf8, 0xf7, 0xf6, 0xf5, 0xf4, 0xf3, 0xf2, 0xf1, 0xf0, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff};
 	uint8_t byRNum = 20;
 	EXPECT_TRUE(_RKey_proc(key, byRNum) == 0x33221100);
 	byRNum = 24;

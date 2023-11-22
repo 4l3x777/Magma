@@ -5,35 +5,39 @@
 #include <stdint.h>
 
 #if defined(_WIN32)
-    //  Microsoft 
-    #define EXPORT __declspec(dllexport)
-    #define IMPORT __declspec(dllimport)
+//  Microsoft
+#define EXPORT __declspec(dllexport)
+#define IMPORT __declspec(dllimport)
 #elif defined(__linux)
-    //  GCC
-    #define EXPORT __attribute__((visibility("default")))
-    #define IMPORT
+//  GCC
+#define EXPORT __attribute__((visibility("default")))
+#define IMPORT
 #else
-    //  do nothing and hope for the best?
-    #define EXPORT
-    #define IMPORT
-    #pragma warning Unknown dynamic link import/export semantics.
+//  do nothing and hope for the best?
+#define EXPORT
+#define IMPORT
+#pragma warning Unknown dynamic link import / export semantics.
 #endif
 
-#ifdef __cplusplus 
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
-	uint64_t  _GOST_encr(uint8_t* byPKey, uint32_t* dwA1, uint32_t* dwA0);
-	uint64_t  _GOST_decr(uint8_t* byPKey, uint32_t* dwA1, uint32_t* dwA0);
+    uint64_t _GOST_encr(uint8_t *byPKey, uint32_t *dwA1, uint32_t *dwA0);
+    uint64_t _GOST_decr(uint8_t *byPKey, uint32_t *dwA1, uint32_t *dwA0);
 #ifdef __cplusplus
 }
 #endif
 
-#ifdef __cplusplus 
-extern "C" EXPORT uint64_t encrypt(uint8_t* byPKey, uint64_t data_block) { 
+#ifdef __cplusplus
+extern "C" EXPORT uint64_t encrypt(uint8_t *byPKey, uint64_t data_block)
+{
 #else
-EXPORT uint64_t encrypt(uint8_t* byPKey, uint64_t data_block) {
+EXPORT uint64_t encrypt(uint8_t *byPKey, uint64_t data_block)
+{
 #endif
-    union block{
+    union block
+    {
         uint64_t data64;
         uint32_t data32[2];
     };
@@ -45,11 +49,14 @@ EXPORT uint64_t encrypt(uint8_t* byPKey, uint64_t data_block) {
 }
 
 #ifdef __cplusplus
-extern "C" EXPORT uint64_t decrypt(uint8_t* byPKey, uint64_t data_block) {
-#else 
-EXPORT uint64_t decrypt(uint8_t* byPKey, uint64_t data_block) {
-#endif  
-    union block{
+extern "C" EXPORT uint64_t decrypt(uint8_t *byPKey, uint64_t data_block)
+{
+#else
+EXPORT uint64_t decrypt(uint8_t *byPKey, uint64_t data_block)
+{
+#endif
+    union block
+    {
         uint64_t data64;
         uint32_t data32[2];
     };
@@ -62,36 +69,36 @@ EXPORT uint64_t decrypt(uint8_t* byPKey, uint64_t data_block) {
 
 #if defined(_WIN32)
 EXPORT BOOL WINAPI DllMain(
-    HINSTANCE hinstDLL,  // handle to DLL module
-    DWORD fdwReason,     // reason for calling function
-    LPVOID lpvReserved )  // reserved
+    HINSTANCE hinstDLL, // handle to DLL module
+    DWORD fdwReason,    // reason for calling function
+    LPVOID lpvReserved) // reserved
 {
     // Perform actions based on the reason for calling.
-    switch( fdwReason ) 
-    { 
-        case DLL_PROCESS_ATTACH:
-         // Initialize once for each new process.
-         // Return FALSE to fail DLL load.
-            break;
+    switch (fdwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+        // Initialize once for each new process.
+        // Return FALSE to fail DLL load.
+        break;
 
-        case DLL_THREAD_ATTACH:
-         // Do thread-specific initialization.
-            break;
+    case DLL_THREAD_ATTACH:
+        // Do thread-specific initialization.
+        break;
 
-        case DLL_THREAD_DETACH:
-         // Do thread-specific cleanup.
-            break;
+    case DLL_THREAD_DETACH:
+        // Do thread-specific cleanup.
+        break;
 
-        case DLL_PROCESS_DETACH:
-        
-            if (lpvReserved != nullptr)
-            {
-                break; // do not do cleanup if process termination scenario
-            }
-            
-         // Perform any necessary cleanup.
-            break;
+    case DLL_PROCESS_DETACH:
+
+        if (lpvReserved != nullptr)
+        {
+            break; // do not do cleanup if process termination scenario
+        }
+
+        // Perform any necessary cleanup.
+        break;
     }
-    return TRUE;  // Successful DLL_PROCESS_ATTACH.
+    return TRUE; // Successful DLL_PROCESS_ATTACH.
 }
 #endif
